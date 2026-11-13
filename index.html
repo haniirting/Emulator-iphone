@@ -3,295 +3,252 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#080810">
-<title>iPhone 17 Pro Max Simulator</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#08090d">
+<title>iPhone 17 Pro Max — Simulator 4.0</title>
 <style>
-:root{--accent:#2997ff;--glass:rgba(255,255,255,.15);--text:#fff}
+:root{
+ --accent:#0a84ff;--fg:#fff;--glass:rgba(255,255,255,.17);
+ --surface:#f2f2f7;--ink:#17171b;
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#090a12;color:white;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;overflow:hidden}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif}
+body{background:#090a0f;color:white}
 button,input,textarea{font:inherit}
-button{border:0;color:inherit;cursor:pointer}
-#device{height:100dvh;width:100vw;max-width:460px;margin:auto;position:relative;overflow:hidden;background:#111;border-radius:0}
-.wallpaper{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,#ff8a42 0%,#a53b82 35%,#263b85 68%,#101426 100%);transition:.3s}
-.wallpaper:after{content:"";position:absolute;inset:0;background:linear-gradient(130deg,transparent 20%,rgba(255,255,255,.14),transparent 65%)}
-#status{position:absolute;z-index:20;top:0;left:0;width:100%;height:48px;padding:13px 27px;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:650;pointer-events:none}
-#island{position:absolute;z-index:30;top:9px;left:50%;transform:translateX(-50%);height:31px;width:112px;border-radius:30px;background:#000;box-shadow:0 0 0 1px #222;transition:.25s}
-#island.active{width:220px;height:48px}
-#screen{position:absolute;inset:0;z-index:2}
-#lock{position:absolute;inset:0;z-index:10;text-align:center;padding-top:105px}
-#lockTime{font-size:82px;font-weight:200;letter-spacing:-5px}
-#lockDate{font-size:19px;margin-top:-5px}
-.lockHint{position:absolute;bottom:70px;width:100%;font-size:13px;opacity:.8}
-#unlock{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:130px;height:5px;border-radius:5px;background:#fff}
-#home{position:absolute;inset:0;padding:65px 20px 35px;display:none}
-.widget{height:125px;border-radius:25px;background:var(--glass);backdrop-filter:blur(25px);padding:17px;margin-bottom:22px;border:1px solid #ffffff20}
-.widget small{opacity:.8}.widget strong{font-size:32px;display:block;margin-top:8px}
-.appgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:21px 12px}
-.app{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;text-shadow:0 1px 4px #000}
-.appIcon{width:57px;height:57px;border-radius:16px;display:grid;place-items:center;font-size:29px;background:linear-gradient(145deg,#ffffff55,#ffffff15);box-shadow:0 5px 15px #0003;backdrop-filter:blur(15px)}
-.dock{position:absolute;bottom:23px;left:15px;right:15px;height:83px;border-radius:27px;background:#ffffff30;backdrop-filter:blur(25px);display:flex;align-items:center;justify-content:space-evenly}
-.dock .appIcon{width:55px;height:55px}
-#appWindow{position:absolute;inset:0;z-index:15;background:#f2f2f7;color:#111;display:none;overflow:auto;padding-top:48px}
-.appHeader{height:53px;position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#f2f2f7dd;backdrop-filter:blur(20px);font-weight:650}
-.appHeader button{color:var(--accent);background:none;font-size:16px}
-.appBody{padding:15px 17px 40px}
-.panel{background:white;border-radius:16px;padding:15px;margin-bottom:13px}
-.panel h3{margin:0 0 10px;font-size:17px}
-.settingRow{padding:14px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.settingRow:last-child{border:0}
-.settingRow button,.action{background:#e9e9ef;color:#1677e8;border-radius:10px;padding:9px 13px}
-input,textarea{border:0;outline:0;background:#fff;color:#111;border-radius:10px;padding:12px;width:100%;font-size:16px}
+button{cursor:pointer}
+#phone{position:relative;width:100vw;height:100dvh;overflow:hidden;background:#111;isolation:isolate}
+#wallpaper{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 75%,#f7a36b 0%,#bc5d80 32%,#414e9b 65%,#11162b 100%);transition:background .5s}
+#wallpaper:before{content:"";position:absolute;inset:0;background:linear-gradient(130deg,transparent 15%,#ffffff22 45%,transparent 70%);pointer-events:none}
+#status{position:absolute;z-index:20;top:0;left:0;right:0;height:48px;padding:12px 28px 0;display:flex;justify-content:space-between;font-size:14px;font-weight:650;pointer-events:none}
+#statusRight{display:flex;gap:6px;align-items:center}
+#island{position:absolute;z-index:31;top:9px;left:50%;transform:translateX(-50%);width:119px;height:34px;background:#000;border-radius:30px;transition:all .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 0 1px #222}
+#island.expanded{width:min(310px,78vw);height:76px;border-radius:27px}
+#islandContent{display:none;height:100%;padding:12px 17px;align-items:center;justify-content:space-between;font-size:12px}
+#island.expanded #islandContent{display:flex}
+#lock{position:absolute;z-index:10;inset:0;text-align:center;padding-top:clamp(115px,19vh,175px);transition:opacity .3s}
+#lockDate{font-size:18px;font-weight:500}
+#lockTime{font-size:clamp(76px,19vw,100px);font-weight:200;letter-spacing:-5px;line-height:1.05}
+#lockWidgets{display:flex;gap:10px;justify-content:center;margin:30px 22px}
+.lockWidget{background:#ffffff20;backdrop-filter:blur(20px);border:1px solid #ffffff20;border-radius:18px;padding:12px;min-width:105px;font-size:12px}
+#unlockHint{position:absolute;bottom:65px;left:0;right:0;font-size:13px;text-shadow:0 1px 5px #000}
+#home{position:absolute;inset:0;padding:66px 21px 120px;display:none}
+.widget{height:122px;padding:16px 18px;border-radius:25px;background:#ffffff25;border:1px solid #ffffff25;backdrop-filter:blur(25px);margin-bottom:23px;box-shadow:0 8px 25px #0002}
+.widget small{opacity:.85}.widget strong{display:block;font-size:35px;font-weight:550;margin:7px 0}
+#grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px 12px}
+.app{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;font-size:11px;text-shadow:0 1px 4px #000}
+.appIcon{width:clamp(52px,14vw,62px);height:clamp(52px,14vw,62px);border-radius:17px;display:grid;place-items:center;font-size:29px;color:white;box-shadow:0 5px 15px #0003;position:relative;overflow:hidden}
+.appIcon:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#ffffff45,transparent 55%);pointer-events:none}
+#dock{position:absolute;bottom:25px;left:14px;right:14px;height:82px;border-radius:27px;background:#ffffff38;border:1px solid #ffffff25;backdrop-filter:blur(28px);display:flex;align-items:center;justify-content:space-evenly}
+#dock .appIcon{width:55px;height:55px}
+#app{position:absolute;z-index:40;inset:0;background:var(--surface);color:var(--ink);display:none;overflow:auto;padding-top:env(safe-area-inset-top,0px)}
+#appHeader{height:55px;position:sticky;top:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:0 17px;background:#f2f2f7e8;backdrop-filter:blur(22px);font-weight:650}
+#appHeader button{border:0;background:none;color:var(--accent);font-size:16px}
+#appBody{padding:14px 16px 55px}
+.card{background:#fff;border-radius:17px;padding:16px;margin-bottom:13px}
+.card h3{font-size:17px;margin:0 0 12px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid #eee;font-size:14px}
+.row:last-child{border:0}
+.action{border:0;border-radius:12px;padding:10px 14px;background:#e8e8ed;color:#087bea}
+input,textarea{width:100%;border:0;outline:0;border-radius:12px;background:#ededf2;color:#17171b;padding:13px;font-size:16px}
 textarea{min-height:180px;resize:vertical}
-#calcDisplay{font-size:54px;text-align:right;padding:35px 10px 20px;min-height:130px;overflow:hidden}
-.calcGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.calcGrid button{height:70px;border-radius:50%;font-size:25px;background:#333;color:white}
-.calcGrid .operator{background:#ff9f0a}.calcGrid .light{background:#a5a5a5;color:#111}.calcGrid .zero{grid-column:span 2;border-radius:40px;text-align:left;padding-left:28px}
-.calcGrid button:active{filter:brightness(1.3)}
-.browserBar{display:flex;gap:7px;margin-bottom:12px}
-.browserBar input{background:#e4e4e9;border-radius:12px;min-width:0}
-.browserBar button{background:#e4e4e9;color:#1677e8;border-radius:10px;padding:0 12px}
-#browserFrame{width:100%;height:65vh;border:0;background:white}
-#control{position:absolute;inset:0;z-index:40;background:#101522eF;backdrop-filter:blur(35px);display:none;padding:65px 20px}
-.controlGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.controlTile{height:85px;border-radius:20px;background:#ffffff25;padding:15px;font-size:14px}
-.controlTile b{display:block;font-size:23px;margin-bottom:5px}
-#toast{position:absolute;z-index:60;top:60px;left:50%;transform:translateX(-50%);background:#222d;color:white;padding:12px 18px;border-radius:20px;display:none;white-space:nowrap}
-#homebar{position:absolute;z-index:50;bottom:7px;left:50%;transform:translateX(-50%);width:125px;height:5px;border-radius:5px;background:white}
-#cameraPreview{width:100%;border-radius:16px;background:#222}
-.colorDot{width:27px;height:27px;border-radius:50%;display:inline-block;margin-right:8px;border:2px solid #aaa}
-@media(min-width:600px){body{display:grid;place-items:center;background:#20212a}#device{height:min(900px,96dvh);width:min(430px,96vw);border-radius:48px;border:7px solid #303039;box-shadow:0 20px 80px #0009}#screen{border-radius:40px;overflow:hidden}}
+#calcDisplay{font-size:60px;text-align:right;overflow:hidden;padding:35px 8px 25px;min-height:130px;font-weight:300}
+.calc{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.calc button{height:68px;border:0;border-radius:50%;font-size:25px;background:#333;color:#fff}
+.calc .op{background:#ff9f0a}.calc .light{background:#a5a5a5;color:#111}.calc .zero{grid-column:span 2;border-radius:40px;text-align:left;padding-left:27px}
+#browserTools{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}
+#browserTools button{border:0;border-radius:10px;padding:9px;background:#e5e5eb;color:#087bea}
+#browserFrame{width:100%;height:65vh;border:0;border-radius:12px;background:#fff}
+#control{position:absolute;z-index:60;inset:0;display:none;padding:65px 20px;background:#171c2aee;backdrop-filter:blur(35px)}
+#control h2{font-size:28px}
+#controlGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{min-height:84px;border-radius:21px;background:#ffffff20;padding:14px;font-size:14px}
+.tile b{display:block;font-size:22px;margin-bottom:5px}
+#brightness{width:100%;margin-top:18px}
+#toast{position:absolute;z-index:90;top:60px;left:50%;transform:translateX(-50%);background:#24242bee;padding:12px 18px;border-radius:22px;font-size:13px;display:none;white-space:nowrap}
+#homebar{position:absolute;z-index:80;bottom:7px;left:50%;transform:translateX(-50%);width:135px;height:5px;border-radius:5px;background:#fff}
+#cameraVideo{width:100%;border-radius:15px;background:#111}
+@media(min-width:600px){
+ body{display:grid;place-items:center;background:#20212b}
+ #phone{width:min(430px,95vw);height:min(900px,96dvh);border:7px solid #303039;border-radius:48px;box-shadow:0 25px 90px #000b}
+ #wallpaper,#home,#lock,#app,#control{border-radius:40px;overflow:hidden}
+}
 </style>
 </head>
 <body>
-<div id="device">
- <div class="wallpaper" id="wallpaper"></div>
- <div id="status"><span id="statusTime">9:41</span><span>●●●  Wi-Fi  ▰</span></div>
- <div id="island"></div>
- <div id="screen">
-  <div id="lock" onclick="unlockPhone()">
-   <div id="lockDate">Пятница, 13 ноября</div>
-   <div id="lockTime">9:41</div>
-   <div class="lockHint">Коснитесь, чтобы открыть</div>
-   <div id="unlock"></div>
+<div id="phone">
+ <div id="wallpaper"></div>
+ <div id="status"><span id="statusTime">9:41</span><span id="statusRight">●●●　 Wi-Fi　 ▰</span></div>
+ <div id="island" onclick="expandIsland()"><div id="islandContent"><span>● Сейчас играет</span><span>♫　Ⅱ</span></div></div>
+
+ <section id="lock" onclick="unlock()">
+  <div id="lockDate"></div><div id="lockTime">9:41</div>
+  <div id="lockWidgets">
+   <div class="lockWidget">🌤️ Погода<br><b>+18°</b></div>
+   <div class="lockWidget">🔋 Аккумулятор<br><b>100%</b></div>
   </div>
-  <div id="home">
-   <div class="widget"><small id="widgetDate">Пятница, 13 ноября</small><strong id="widgetTime">9:41</strong><small>Хорошего дня!</small></div>
-   <div class="appgrid" id="appgrid"></div>
-   <div class="dock" id="dock"></div>
-  </div>
- </div>
- <div id="appWindow">
-  <div class="appHeader"><button onclick="closeApp()">‹ Домой</button><span id="appTitle">Приложение</span><button onclick="closeApp()">Готово</button></div>
-  <div class="appBody" id="appBody"></div>
- </div>
- <div id="control">
+  <div id="unlockHint">Проведите вверх, чтобы открыть</div>
+ </section>
+
+ <section id="home">
+  <div class="widget"><small id="widgetDate"></small><strong id="widgetTime">9:41</strong><small>Хорошего дня!</small></div>
+  <div id="grid"></div>
+  <div id="dock"></div>
+ </section>
+
+ <section id="app">
+  <header id="appHeader"><button onclick="closeApp()">‹ Домой</button><span id="appTitle">Приложение</span><button onclick="closeApp()">Готово</button></header>
+  <main id="appBody"></main>
+ </section>
+
+ <section id="control">
   <h2>Пункт управления</h2>
-  <div class="controlGrid">
-   <div class="controlTile" onclick="toggleControl(this)"><b>◉</b>Авиарежим</div>
-   <div class="controlTile" onclick="toggleControl(this)"><b>◉</b>Wi-Fi</div>
-   <div class="controlTile" onclick="toggleControl(this)"><b>◉</b>Bluetooth</div>
-   <div class="controlTile" onclick="toggleControl(this)"><b>☾</b>Фокусирование</div>
-   <div class="controlTile" onclick="toast('Яркость изменена')"><b>☀</b>Яркость</div>
-   <div class="controlTile" onclick="toast('Громкость изменена')"><b>♫</b>Громкость</div>
+  <div id="controlGrid">
+   <div class="tile" onclick="toggleTile(this)"> <b>✈️</b>Авиарежим</div>
+   <div class="tile" onclick="toggleTile(this)"><b>◉</b>Wi-Fi</div>
+   <div class="tile" onclick="toggleTile(this)"><b>ᛒ</b>Bluetooth</div>
+   <div class="tile" onclick="toggleTile(this)"><b>☾</b>Фокусирование</div>
+   <div class="tile" onclick="toggleTile(this)"><b>🔒</b>Блокировка ориентации</div>
+   <div class="tile" onclick="toggleTile(this)"><b>☀️</b>Тёмный режим</div>
   </div>
-  <button class="action" style="margin-top:20px" onclick="hideControl()">Закрыть</button>
- </div>
+  <p>Яркость</p><input id="brightness" type="range" min="30" max="100" value="100" oninput="setBrightness(this.value)">
+  <button class="action" style="margin-top:25px" onclick="hideControl()">Закрыть</button>
+ </section>
  <div id="toast"></div>
- <div id="homebar" onclick="closeApp()"></div>
+ <div id="homebar" onclick="homeAction()"></div>
 </div>
+
 <script>
 const apps=[
- ['Телефон','📞','phone'],['Сообщения','💬','messages'],['Safari','🧭','safari'],['Фото','🌄','photos'],
- ['Камера','📷','camera'],['Настройки','⚙️','settings'],['Заметки','📝','notes'],['Калькулятор','🧮','calculator'],
- ['Часы','🕒','clock'],['Погода','🌤️','weather'],['Файлы','📁','files'],['App Store','🅰️','store'],
- ['Музыка','🎵','music'],['Контакты','👤','contacts'],['Почта','✉️','mail'],['Карты','🗺️','maps']
+ ['Телефон','📞','#35c86b','phone'],['Сообщения','💬','#39c85a','messages'],['Safari','🧭','#168bfa','safari'],['Фото','🌈','#fff','#photos'],
+ ['Камера','📷','#555','camera'],['Настройки','⚙️','#8c929a','settings'],['Заметки','📝','#fff','notes'],['Калькулятор','＋','#333','calculator'],
+ ['Часы','🕒','#111','clock'],['Погода','🌤️','#4caafa','weather'],['Файлы','📁','#398cf5','files'],['App Store','A','#168bfa','store'],
+ ['Музыка','🎵','#ed3d65','music'],['Контакты','👤','#ddd','contacts'],['Почта','✉️','#168bfa','mail'],['Карты','🗺️','#62b97b','maps']
 ];
-let state={color:'orange',wallpaper:0,fullscreen:false};
-let currentApp='',calcValue='0',calcPrev=null,calcOp=null,calcReset=false;
-let notes=localStorage.getItem('sim_notes')||'';
-let contacts=JSON.parse(localStorage.getItem('sim_contacts')||'[]');
-let messages=JSON.parse(localStorage.getItem('sim_messages')||'[]');
-let history=JSON.parse(localStorage.getItem('sim_history')||'[]');
-let bookmarks=JSON.parse(localStorage.getItem('sim_bookmarks')||'[]');
 const $=id=>document.getElementById(id);
-function renderApps(){
- $('appgrid').innerHTML=apps.slice(0,12).map(a=>appHTML(a)).join('');
- $('dock').innerHTML=apps.slice(12).map(a=>appHTML(a)).join('');
+let notes=localStorage.getItem('ip_notes')||'';
+let contacts=JSON.parse(localStorage.getItem('ip_contacts')||'[]');
+let messages=JSON.parse(localStorage.getItem('ip_messages')||'[]');
+let current='',calc='0',prev=null,op=null,reset=false,stream=null;
+let history=JSON.parse(localStorage.getItem('ip_history')||'[]');
+let bookmarks=JSON.parse(localStorage.getItem('ip_bookmarks')||'[]');
+function appIcon(a){return `<div class="app" onclick="openApp('${a[3]}')"><div class="appIcon" style="background:${a[2]}">${a[1]}</div><span>${a[0]}</span></div>`}
+$('grid').innerHTML=apps.slice(0,12).map(appIcon).join('');
+$('dock').innerHTML=apps.slice(12).map(appIcon).join('');
+function updateClock(){
+ const d=new Date(),t=d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+ $('statusTime').textContent=t;$('lockTime').textContent=t;$('widgetTime').textContent=t;
+ const date=d.toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'});
+ $('lockDate').textContent=date;$('widgetDate').textContent=date;
 }
-function appHTML(a){return `<div class="app" onclick="openApp('${a[2]}')"><div class="appIcon">${a[1]}</div><span>${a[0]}</span></div>`}
-function updateTime(){
- let d=new Date(),time=d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
- $('statusTime').textContent=time;$('lockTime').textContent=time;$('widgetTime').textContent=time;
- $('lockDate').textContent=d.toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'});
- $('widgetDate').textContent=$('lockDate').textContent;
+setInterval(updateClock,1000);updateClock();
+function unlock(){$('lock').style.display='none';$('home').style.display='block'}
+function toast(t){$('toast').textContent=t;$('toast').style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('toast').style.display='none',2200)}
+function openApp(name){
+ current=name;$('appTitle').textContent=apps.find(a=>a[3]===name)?.[0]||name;
+ $('app').style.display='block';$('appBody').innerHTML='';
+ const b=$('appBody');
+ ({settings,phone,messages:messagesApp,safari,photos, camera,notes:notesApp,calculator,clock,weather,files,store,music,contacts:contactsApp,mail,maps}[name]||settings)(b);
 }
-setInterval(updateTime,1000);updateTime();renderApps();
-function unlockPhone(){$('lock').style.display='none';$('home').style.display='block'}
-function closeApp(){$('appWindow').style.display='none';currentApp=''}
-function toast(t){$('toast').textContent=t;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',1900)}
+function closeApp(){if(stream)stopCamera();$('app').style.display='none';current=''}
+function homeAction(){if($('control').style.display==='block')hideControl();else if($('app').style.display==='block')closeApp();else showControl()}
 function showControl(){$('control').style.display='block'}
 function hideControl(){$('control').style.display='none'}
-function toggleControl(el){el.style.background=el.dataset.on==='1'?'#ffffff25':'#287cff';el.dataset.on=el.dataset.on==='1'?'0':'1'}
-function openApp(name){
- currentApp=name;$('appTitle').textContent=apps.find(a=>a[2]===name)?.[0]||name;
- $('appWindow').style.display='block';$('appBody').innerHTML='';
- const b=$('appBody');
- if(name==='settings')settings(b);
- if(name==='calculator')calculator(b);
- if(name==='notes')notesApp(b);
- if(name==='safari')safari(b);
- if(name==='phone')phone(b);
- if(name==='messages')messagesApp(b);
- if(name==='contacts')contactsApp(b);
- if(name==='clock')clock(b);
- if(name==='weather')weather(b);
- if(name==='photos')photos(b);
- if(name==='camera')camera(b);
- if(name==='files')files(b);
- if(name==='store')store(b);
- if(name==='music')music(b);
- if(name==='mail')mail(b);
- if(name==='maps')maps(b);
-}
+function toggleTile(el){el.style.background=el.dataset.on==='1'?'#ffffff20':'#167cff';el.dataset.on=el.dataset.on==='1'?'0':'1'}
+function expandIsland(){$('island').classList.toggle('expanded')}
+function setBrightness(v){$('phone').style.filter=`brightness(${v/100})`}
 function settings(b){
  b.innerHTML=`
- <div class="panel"><h3>Apple Account</h3><div style="font-size:14px;color:#777">Виртуальная учётная запись симулятора</div><div class="settingRow"><span>Илья</span><button onclick="toast('Это демонстрационный аккаунт')">Профиль</button></div></div>
- <div class="panel"><h3>Основные</h3>
- <div class="settingRow"><span>Модель</span><b>iPhone 17 Pro Max</b></div>
- <div class="settingRow"><span>Версия iOS</span><b>26.0 Simulator</b></div>
- <div class="settingRow"><span>Полноэкранный режим</span><button onclick="toggleFullscreen()">Переключить</button></div>
- </div>
- <div class="panel"><h3>Внешний вид</h3>
- <div class="settingRow"><span>Cosmic Orange</span><button onclick="setColor('orange')">Выбрать</button></div>
- <div class="settingRow"><span>Deep Blue</span><button onclick="setColor('blue')">Выбрать</button></div>
- <div class="settingRow"><span>Silver</span><button onclick="setColor('silver')">Выбрать</button></div>
- <div class="settingRow"><span>Сменить обои</span><button onclick="changeWallpaper()">Изменить</button></div>
- </div>
- <div class="panel"><h3>Резервная копия</h3><p style="font-size:13px;color:#777">Экспортируй заметки, контакты, сообщения и настройки.</p>
- <button class="action" onclick="exportBackup()">Экспорт JSON</button>
- <button class="action" onclick="document.getElementById('backupFile').click()">Импорт JSON</button>
- <input id="backupFile" type="file" accept=".json" hidden onchange="importBackup(event)">
- </div>
- <div class="panel"><h3>О симуляторе</h3><p style="font-size:13px;color:#777">Неофициальный браузерный симулятор. Не является настоящей iOS или устройством Apple. Данные хранятся в браузере.</p></div>`;
+ <div class="card"><h3>Apple Account</h3><div class="row"><span>Виртуальный профиль</span><button class="action" onclick="toast('Демо-профиль')">Открыть</button></div></div>
+ <div class="card"><h3>Основные</h3>
+ <div class="row">Модель <b>iPhone 17 Pro Max</b></div>
+ <div class="row">Версия <b>iOS 26 Simulator</b></div>
+ <div class="row">Экран <b>6,9″</b></div>
+ <div class="row">Полноэкранный режим <button class="action" onclick="fullscreen()">Включить</button></div></div>
+ <div class="card"><h3>Внешний вид</h3>
+ <div class="row">Cosmic Orange <button class="action" onclick="bodyColor('#d87836')">Выбрать</button></div>
+ <div class="row">Deep Blue <button class="action" onclick="bodyColor('#263c68')">Выбрать</button></div>
+ <div class="row">Silver <button class="action" onclick="bodyColor('#b5bac2')">Выбрать</button></div>
+ <div class="row">Обои <button class="action" onclick="wallpaper()">Сменить</button></div></div>
+ <div class="card"><h3>Данные</h3>
+ <button class="action" onclick="backup()">Экспорт резервной копии</button>
+ <button class="action" onclick="$('restoreFile').click()">Импорт</button>
+ <input id="restoreFile" hidden type="file" accept=".json" onchange="restore(event)"></div>
+ <div class="card"><h3>Об устройстве</h3><p style="font-size:13px;color:#777">Браузерный симулятор. Не является настоящей iOS. Некоторые возможности требуют HTTPS и разрешения браузера.</p></div>`;
 }
-function setColor(c){
- if(state.fullscreen){toast('Выйди из полноэкранного режима для смены корпуса');return}
- state.color=c;
- let colors={orange:'#d87836',blue:'#253c69',silver:'#aeb4be'};
- $('device').style.borderColor=colors[c];toast('Цвет корпуса изменён');
+function bodyColor(c){if(document.fullscreenElement){toast('Сначала выйди из полного экрана');return} $('phone').style.borderColor=c;toast('Цвет корпуса изменён')}
+async function fullscreen(){try{if(!document.fullscreenElement)await $('phone').requestFullscreen();else await document.exitFullscreen()}catch{toast('Полноэкранный режим недоступен')}}
+function wallpaper(){
+ const w=['radial-gradient(ellipse at 50% 75%,#f7a36b,#bc5d80 32%,#414e9b 65%,#11162b)','radial-gradient(ellipse at 30% 30%,#61d6f5,#234b99 60%,#11162b)','radial-gradient(ellipse at 70% 60%,#d6b2ff,#593e9b 60%,#101426)','radial-gradient(ellipse at 40% 70%,#8ce5c5,#1e7182 60%,#101426)'];
+ $('wallpaper').style.background=w[Math.floor(Math.random()*w.length)];
 }
-function changeWallpaper(){
- state.wallpaper=(state.wallpaper+1)%4;
- let w=['radial-gradient(ellipse at 50% 80%,#ff8a42,#a53b82 40%,#263b85 75%,#101426)','radial-gradient(ellipse at 40% 30%,#58c8ff,#163c8c 65%,#101426)','radial-gradient(ellipse at 60% 70%,#c6a2ff,#513b99 50%,#101426)','radial-gradient(ellipse at 50% 40%,#a8e5cc,#226b79 55%,#101426)'];
- $('wallpaper').style.background=w[state.wallpaper];toast('Обои обновлены');
-}
-async function toggleFullscreen(){
- try{
- if(!document.fullscreenElement){await $('device').requestFullscreen();state.fullscreen=true}
- else{await document.exitFullscreen();state.fullscreen=false}
- }catch(e){toast('Полноэкранный режим недоступен в этом браузере')}
-}
-document.addEventListener('fullscreenchange',()=>state.fullscreen=!!document.fullscreenElement);
-function exportBackup(){
- let data={notes,contacts,messages,history,bookmarks,state};
- let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
- downloadBlob(blob,'iphone-simulator-backup.json');
-}
-function importBackup(e){
- let f=e.target.files[0];if(!f)return;
- let r=new FileReader();r.onload=()=>{
- try{let d=JSON.parse(r.result);notes=d.notes||'';contacts=d.contacts||[];messages=d.messages||[];history=d.history||[];bookmarks=d.bookmarks||[];localStorage.setItem('sim_notes',notes);localStorage.setItem('sim_contacts',JSON.stringify(contacts));localStorage.setItem('sim_messages',JSON.stringify(messages));localStorage.setItem('sim_history',JSON.stringify(history));localStorage.setItem('sim_bookmarks',JSON.stringify(bookmarks));toast('Резервная копия восстановлена');openApp('settings')}
- catch{toast('Ошибка файла резервной копии')}
- };r.readAsText(f)
-}
-function downloadBlob(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function backup(){const data={notes,contacts,messages,history,bookmarks};download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'iphone-backup.json')}
+function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);notes=d.notes||'';contacts=d.contacts||[];messages=d.messages||[];history=d.history||[];bookmarks=d.bookmarks||[];saveAll();toast('Копия восстановлена')}catch{toast('Неверный файл')}};r.readAsText(f)}
+function saveAll(){localStorage.setItem('ip_notes',notes);localStorage.setItem('ip_contacts',JSON.stringify(contacts));localStorage.setItem('ip_messages',JSON.stringify(messages));localStorage.setItem('ip_history',JSON.stringify(history));localStorage.setItem('ip_bookmarks',JSON.stringify(bookmarks))}
+function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function calculator(b){
- b.innerHTML=`<div id="calcDisplay">0</div><div class="calcGrid">
- <button class="light" onclick="calcClear()">AC</button><button class="light" onclick="calcSign()">+/−</button><button class="light" onclick="calcPercent()">%</button><button class="operator" onclick="calcOperator('÷')">÷</button>
- <button onclick="calcDigit('7')">7</button><button onclick="calcDigit('8')">8</button><button onclick="calcDigit('9')">9</button><button class="operator" onclick="calcOperator('×')">×</button>
- <button onclick="calcDigit('4')">4</button><button onclick="calcDigit('5')">5</button><button onclick="calcDigit('6')">6</button><button class="operator" onclick="calcOperator('−')">−</button>
- <button onclick="calcDigit('1')">1</button><button onclick="calcDigit('2')">2</button><button onclick="calcDigit('3')">3</button><button class="operator" onclick="calcOperator('+')">+</button>
- <button class="zero" onclick="calcDigit('0')">0</button><button onclick="calcDigit('.')">.</button><button class="operator" onclick="calcEquals()">=</button></div>`;
- calcClear();
+ b.innerHTML=`<div id="calcDisplay">0</div><div class="calc">
+ ${[['AC','light','clear'],['+/−','light','sign'],['%','light','percent'],['÷','op','/'],['7','','7'],['8','','8'],['9','','9'],['×','op','*'],['4','','4'],['5','','5'],['6','','6'],['−','op','-'],['1','','1'],['2','','2'],['3','','3'],['+','op','+'],['0','zero','0'],['.','','.'],['=','op','=']].map(x=>`<button class="${x[1]}" onclick="calcPress('${x[2]}')">${x[0]}</button>`).join('')}
+ </div>`;
 }
-function displayCalc(){$('calcDisplay').textContent=calcValue}
-function calcClear(){calcValue='0';calcPrev=null;calcOp=null;calcReset=false;displayCalc()}
-function calcDigit(n){if(calcReset){calcValue='0';calcReset=false}if(n==='.'&&calcValue.includes('.'))return;calcValue=calcValue==='0'&&n!=='.'?n:calcValue+n;displayCalc()}
-function calcSign(){if(calcValue!=='0')calcValue=String(-Number(calcValue));displayCalc()}
-function calcPercent(){calcValue=String(Number(calcValue)/100);displayCalc()}
-function calcOperator(op){if(calcPrev!==null&&!calcReset)calcEquals();calcPrev=Number(calcValue);calcOp=op;calcReset=true}
-function calcEquals(){if(calcPrev===null||!calcOp)return;let a=calcPrev,c=Number(calcValue),r=calcOp==='+'?a+c:calcOp==='−'?a-c:calcOp==='×'?a*c:c===0?'Ошибка':a/c;calcValue=String(Number.isFinite(r)?Number(r.toPrecision(10)):r);calcPrev=null;calcOp=null;calcReset=true;displayCalc()}
-function notesApp(b){
- b.innerHTML=`<div class="panel"><h3>Мои заметки</h3><textarea id="noteText" placeholder="Начни писать..."></textarea><div style="display:flex;justify-content:space-between;margin-top:10px"><small id="noteStatus">Сохранено на устройстве</small><button class="action" onclick="saveNote()">Сохранить</button></div></div>`;
- $('noteText').value=notes;
+function calcShow(){$('calcDisplay').textContent=calc}
+function calcPress(k){
+ if(k==='clear'){calc='0';prev=null;op=null;reset=false}
+ else if(k==='sign'){if(calc!=='0')calc=String(-Number(calc))}
+ else if(k==='percent')calc=String(Number(calc)/100);
+ else if('+-*/'.includes(k)){if(prev!==null&&!reset)calcPress('=');prev=Number(calc);op=k;reset=true}
+ else if(k==='='){if(prev!==null&&op){let n=Number(calc),r=op==='+'?prev+n:op==='-'?prev-n:op==='*'?prev*n:n===0?NaN:prev/n;calc=Number.isFinite(r)?String(Number(r.toPrecision(10))):'Ошибка';prev=null;op=null;reset=true}}
+ else{if(reset){calc='0';reset=false}if(k==='.'&&calc.includes('.'))return;calc=calc==='0'&&k!=='.'?k:calc+k}
+ calcShow();
 }
-function saveNote(){notes=$('noteText').value;localStorage.setItem('sim_notes',notes);$('noteStatus').textContent='Сохранено';toast('Заметка сохранена')}
+function notesApp(b){b.innerHTML=`<div class="card"><h3>Заметки</h3><textarea id="noteInput" placeholder="Начни писать..."></textarea><button class="action" style="margin-top:10px" onclick="saveNote()">Сохранить</button></div>`;$('noteInput').value=notes}
+function saveNote(){notes=$('noteInput').value;saveAll();toast('Заметка сохранена')}
 function safari(b){
- b.innerHTML=`<div class="browserBar"><button onclick="browserBack()">‹</button><input id="url" value="https://example.com" placeholder="Поиск или адрес сайта"><button onclick="navigate()">Перейти</button></div><div style="display:flex;gap:8px;margin-bottom:10px"><button class="action" onclick="showBookmarks()">Закладки</button><button class="action" onclick="showHistory()">История</button><button class="action" onclick="openExternal()">Открыть отдельно</button></div><iframe id="browserFrame" sandbox="allow-scripts allow-forms allow-same-origin allow-popups" referrerpolicy="no-referrer"></iframe><p style="font-size:12px;color:#777">Некоторые сайты запрещают открытие внутри симулятора. Используй «Открыть отдельно».</p>`;
+ b.innerHTML=`<div class="card"><div style="display:flex;gap:7px"><input id="address" placeholder="Поиск или адрес сайта" value="https://example.com"><button class="action" onclick="navigate()">Перейти</button></div><div id="browserTools"><button onclick="browserBack()">Назад</button><button onclick="browserForward()">Вперёд</button><button onclick="openOutside()">Открыть отдельно</button><button onclick="bookmark()">Закладка</button><button onclick="showSaved()">Сохранённое</button></div><iframe id="browserFrame" referrerpolicy="no-referrer" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe><p style="font-size:12px;color:#777">Если сайт запрещает встраивание, открой его отдельно.</p></div>`;
  navigate();
 }
-function normalizedUrl(v){v=v.trim();if(!v)return 'https://www.google.com';if(!/^https?:\/\//i.test(v)){if(v.includes('.')&&!v.includes(' '))v='https://'+v;else v='https://www.google.com/search?q='+encodeURIComponent(v)}return v}
-function navigate(){
- let url=normalizedUrl($('url').value);$('url').value=url;$('browserFrame').src=url;
- history.unshift(url);history=history.slice(0,50);localStorage.setItem('sim_history',JSON.stringify(history));
-}
-function openExternal(){window.open(normalizedUrl($('url').value),'_blank','noopener')}
-function browserBack(){try{$('browserFrame').contentWindow.history.back()}catch{toast('Назад недоступно')}}
-function showBookmarks(){let v=prompt('Введи адрес закладки');if(v){bookmarks.unshift(normalizedUrl(v));localStorage.setItem('sim_bookmarks',JSON.stringify(bookmarks));toast('Добавлено в закладки')}}
-function showHistory(){alert(history.slice(0,15).join('\n')||'История пуста')}
-function phone(b){
- b.innerHTML=`<div class="panel"><h3>Телефон</h3><input id="phoneNumber" placeholder="Номер телефона" readonly style="font-size:24px;text-align:center"></div><div class="calcGrid">${['1','2','3','4','5','6','7','8','9','*','0','#'].map(n=>`<button onclick="phoneDigit('${n}')">${n}</button>`).join('')}</div><button class="action" style="display:block;margin:18px auto;background:#34c759;color:white" onclick="toast('Звонки доступны только на настоящем телефоне')">Позвонить</button>`;
-}
-function phoneDigit(n){$('phoneNumber').value+=$('phoneNumber').value? n:n}
-function messagesApp(b){
- b.innerHTML=`<div class="panel"><h3>Сообщения</h3><div id="messageList">${messages.map(m=>`<p><b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.text)}</p>`).join('')||'Нет сообщений'}</div></div><div class="panel"><input id="msgName" placeholder="Имя контакта"><input id="msgText" placeholder="Сообщение" style="margin-top:8px"><button class="action" style="margin-top:10px" onclick="sendMessage()">Отправить</button></div>`;
-}
-function sendMessage(){let name=$('msgName').value.trim(),text=$('msgText').value.trim();if(!name||!text)return toast('Заполни оба поля');messages.push({name,text});localStorage.setItem('sim_messages',JSON.stringify(messages));openApp('messages')}
-function contactsApp(b){
- b.innerHTML=`<div class="panel"><h3>Контакты</h3>${contacts.map((c,i)=>`<div class="settingRow"><span>👤 ${escapeHTML(c.name)}<br><small>${escapeHTML(c.phone)}</small></span><button onclick="deleteContact(${i})">Удалить</button></div>`).join('')||'Контактов пока нет'}</div><div class="panel"><input id="contactName" placeholder="Имя"><input id="contactPhone" placeholder="Телефон" style="margin-top:8px"><button class="action" style="margin-top:10px" onclick="addContact()">Добавить</button><button class="action" style="margin-top:10px" onclick="importVcf()">Импорт VCF</button></div>`;
-}
-function addContact(){let name=$('contactName').value.trim(),phone=$('contactPhone').value.trim();if(!name)return toast('Укажи имя');contacts.push({name,phone});localStorage.setItem('sim_contacts',JSON.stringify(contacts));openApp('contacts')}
-function deleteContact(i){contacts.splice(i,1);localStorage.setItem('sim_contacts',JSON.stringify(contacts));openApp('contacts')}
-function importVcf(){let i=document.createElement('input');i.type='file';i.accept='.vcf,text/vcard';i.onchange=()=>{let r=new FileReader();r.onload=()=>{let chunks=r.result.split('BEGIN:VCARD');chunks.forEach(c=>{let n=c.match(/FN:(.*)/),p=c.match(/TEL[^:]*:(.*)/);if(n)contacts.push({name:n[1].trim(),phone:p?p[1].trim():''})});localStorage.setItem('sim_contacts',JSON.stringify(contacts));openApp('contacts')};r.readAsText(i.files[0])};i.click()}
-function clock(b){
- b.innerHTML=`<div class="panel" style="text-align:center"><h1 id="clockNow" style="font-size:55px;font-weight:300">00:00:00</h1><p>Текущее время</p></div><div class="panel"><h3>Секундомер</h3><h2 id="stopwatch">00:00.0</h2><button class="action" onclick="stopwatchToggle()">Старт / Стоп</button><button class="action" onclick="stopwatchReset()">Сброс</button></div><div class="panel"><h3>Таймер (секунды)</h3><input id="timerInput" type="number" value="60"><button class="action" onclick="startTimer()">Запустить</button><b id="timerResult"></b></div>`;
-}
-let swStart=0,swElapsed=0,swRunning=false,swInterval=null,timerInterval=null;
-setInterval(()=>{let e=swElapsed+(swRunning?Date.now()-swStart:0);let el=$('stopwatch');if(el)el.textContent=(e/1000).toFixed(1)+' сек';let cn=$('clockNow');if(cn)cn.textContent=new Date().toLocaleTimeString('ru-RU')},100);
-function stopwatchToggle(){if(swRunning){swElapsed+=Date.now()-swStart;swRunning=false}else{swStart=Date.now();swRunning=true}}
-function stopwatchReset(){swRunning=false;swElapsed=0}
-function startTimer(){clearInterval(timerInterval);let t=Math.max(1,Number($('timerInput').value)||1);$('timerResult').textContent=' Осталось: '+t;timerInterval=setInterval(()=>{t--;$('timerResult').textContent=' Осталось: '+t;if(t<=0){clearInterval(timerInterval);toast('Таймер завершён')}},1000)}
-function weather(b){b.innerHTML=`<div class="panel" style="text-align:center;padding:35px"><div style="font-size:70px">🌤️</div><h1>Погода</h1><h2>+18°</h2><p>Переменная облачность</p><small>Демонстрационные данные. Не прогноз в реальном времени.</small></div>`}
-function photos(b){
- b.innerHTML=`<div class="panel"><h3>Медиатека</h3><input type="file" accept="image/*" multiple onchange="showPhotos(event)"><div id="photoGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:12px"></div></div>`;
-}
-function showPhotos(e){let grid=$('photoGrid');[...e.target.files].forEach(f=>{let img=document.createElement('img');img.src=URL.createObjectURL(f);img.style='width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px';grid.appendChild(img)})}
-let cameraStream=null;
-async function camera(b){
- b.innerHTML=`<div class="panel"><h3>Камера</h3><video id="cameraPreview" autoplay playsinline></video><div style="display:flex;gap:8px;margin-top:10px"><button class="action" onclick="startCamera()">Включить</button><button class="action" onclick="takePhoto()">Снимок</button><button class="action" onclick="stopCamera()">Выключить</button></div><canvas id="cameraCanvas" hidden></canvas><div id="cameraShot"></div></div>`;
-}
-async function startCamera(){try{cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});$('cameraPreview').srcObject=cameraStream}catch(e){toast('Камера недоступна или нет разрешения')}}
-function takePhoto(){let v=$('cameraPreview');if(!v.srcObject)return toast('Сначала включи камеру');let c=$('cameraCanvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let img=document.createElement('img');img.src=c.toDataURL('image/png');img.style='width:100%;border-radius:12px;margin-top:10px';$('cameraShot').prepend(img)}
-function stopCamera(){if(cameraStream)cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null}
-function files(b){
- b.innerHTML=`<div class="panel"><h3>Файлы</h3><input type="file" multiple onchange="listFiles(event)"><div id="fileList" style="margin-top:12px"></div></div>`;
-}
-function listFiles(e){$('fileList').innerHTML=[...e.target.files].map(f=>`<div class="settingRow"><span>📄 ${escapeHTML(f.name)}</span><small>${(f.size/1024).toFixed(1)} KB</small></div>`).join('')}
-function store(b){b.innerHTML=`<div class="panel"><h2>App Store</h2><p>Виртуальный каталог приложений</p>${[['🎮','Игры'],['🎨','Творчество'],['📚','Образование'],['🛠️','Утилиты']].map(x=>`<div class="settingRow"><span>${x[0]} ${x[1]}</span><button onclick="toast('Это демонстрационный магазин')">Открыть</button></div>`).join('')}<p style="font-size:12px;color:#777">Настоящие приложения и IPA здесь не устанавливаются.</p></div>`}
-function music(b){b.innerHTML=`<div class="panel"><h3>Музыка</h3><input type="file" accept="audio/*" onchange="playMusic(event)"><audio id="audioPlayer" controls style="width:100%;margin-top:15px"></audio></div>`}
-function playMusic(e){$('audioPlayer').src=URL.createObjectURL(e.target.files[0]);$('audioPlayer').play()}
-function mail(b){b.innerHTML=`<div class="panel"><h2>Почта</h2><p>Демонстрационный почтовый интерфейс.</p><button class="action" onclick="toast('Почтовый аккаунт не подключён')">Добавить аккаунт</button></div>`}
-function maps(b){b.innerHTML=`<div class="panel"><h2>Карты</h2><p>Открыть карты в браузере</p><button class="action" onclick="window.open('https://maps.google.com','_blank')">Google Maps</button></div>`}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-let startY=0;
-$('device').addEventListener('touchstart',e=>{startY=e.touches[0].clientY},{passive:true});
-$('device').addEventListener('touchend',e=>{
- let end=e.changedTouches[0].clientY,delta=end-startY;
- if(startY<65&&delta>90&&$('lock').style.display==='none'&&$('appWindow').style.display!=='block')showControl();
- if(startY>window.innerHeight-35&&delta< -50&&$('lock').style.display!=='none')unlockPhone();
+function safeUrl(s){s=s.trim();if(!s)return 'https://www.google.com';if(!/^https?:\/\//i.test(s))s=s.includes('.')&&!s.includes(' ')?'https://'+s:'https://www.google.com/search?q='+encodeURIComponent(s);return s}
+function navigate(){let u=safeUrl($('address').value);$('address').value=u;$('browserFrame').src=u;history.unshift(u);history=history.slice(0,50);saveAll()}
+function openOutside(){window.open(safeUrl($('address').value),'_blank','noopener')}
+function browserBack(){try{$('browserFrame').contentWindow.history.back()}catch{toast('Недоступно для этого сайта')}}
+function browserForward(){try{$('browserFrame').contentWindow.history.forward()}catch{toast('Недоступно для этого сайта')}}
+function bookmark(){bookmarks.unshift(safeUrl($('address').value));saveAll();toast('Добавлено в закладки')}
+function showSaved(){alert('Закладки:\n'+bookmarks.join('\n')+'\n\nИстория:\n'+history.slice(0,10).join('\n'))}
+function phone(b){b.innerHTML=`<div class="card"><h3>Клавиатура</h3><input id="phoneNum" placeholder="Номер телефона" readonly style="font-size:25px;text-align:center;background:white"></div><div class="calc">${'123456789*0#'.split('').map(n=>`<button onclick="$('phoneNum').value+=''+'${n}'">${n}</button>`).join('')}</div><button class="action" style="display:block;margin:15px auto;background:#36bd67;color:white" onclick="toast('Для звонков используй приложение Телефон устройства')">Вызов</button>`}
+function messagesApp(b){b.innerHTML=`<div class="card"><h3>Сообщения</h3><div>${messages.map(m=>`<p><b>${esc(m.name)}</b><br>${esc(m.text)}</p>`).join('')||'Пока нет сообщений'}</div></div><div class="card"><input id="msgName" placeholder="Имя"><input id="msgText" placeholder="Сообщение" style="margin-top:8px"><button class="action" style="margin-top:10px" onclick="sendMsg()">Отправить</button></div>`}
+function sendMsg(){let n=$('msgName').value.trim(),t=$('msgText').value.trim();if(!n||!t)return toast('Заполни поля');messages.push({name:n,text:t});saveAll();openApp('messages')}
+function contactsApp(b){b.innerHTML=`<div class="card"><h3>Контакты</h3>${contacts.map((c,i)=>`<div class="row"><span>👤 ${esc(c.name)}<br>${esc(c.phone)}</span><button class="action" onclick="delContact(${i})">Удалить</button></div>`).join('')||'Нет контактов'}</div><div class="card"><input id="cn" placeholder="Имя"><input id="cp" placeholder="Номер телефона" style="margin-top:8px"><button class="action" style="margin-top:10px" onclick="addContact()">Добавить</button><button class="action" style="margin-top:10px" onclick="importVcf()">Импорт VCF</button></div>`}
+function addContact(){let n=$('cn').value.trim(),p=$('cp').value.trim();if(!n)return toast('Укажи имя');contacts.push({name:n,phone:p});saveAll();openApp('contacts')}
+function delContact(i){contacts.splice(i,1);saveAll();openApp('contacts')}
+function importVcf(){let i=document.createElement('input');i.type='file';i.accept='.vcf';i.onchange=()=>{let r=new FileReader();r.onload=()=>{r.result.split('BEGIN:VCARD').forEach(x=>{let n=x.match(/FN:(.*)/),p=x.match(/TEL[^:]*:(.*)/);if(n)contacts.push({name:n[1].trim(),phone:p?p[1].trim():''})});saveAll();openApp('contacts')};r.readAsText(i.files[0])};i.click()}
+function clock(b){b.innerHTML=`<div class="card" style="text-align:center"><h1 id="clockTime" style="font-size:50px;font-weight:300"></h1>Мировые часы</div><div class="card"><h3>Секундомер</h3><h2 id="sw">0.0 сек</h2><button class="action" onclick="swToggle()">Старт / Стоп</button><button class="action" onclick="swReset()">Сброс</button></div><div class="card"><h3>Таймер</h3><input id="timerSeconds" type="number" value="60"><button class="action" onclick="timerStart()">Запустить</button><b id="timerLabel"></b></div>`}
+let swOn=false,swBase=0,swTotal=0,timerId;
+setInterval(()=>{let c=$('clockTime');if(c)c.textContent=new Date().toLocaleTimeString('ru-RU');let s=$('sw');if(s)s.textContent=((swTotal+(swOn?Date.now()-swBase:0))/1000).toFixed(1)+' сек'},100);
+function swToggle(){if(swOn){swTotal+=Date.now()-swBase;swOn=false}else{swBase=Date.now();swOn=true}}
+function swReset(){swOn=false;swTotal=0}
+function timerStart(){clearInterval(timerId);let n=Math.max(1,Number($('timerSeconds').value)||1);$('timerLabel').textContent=' Осталось: '+n;timerId=setInterval(()=>{n--;$('timerLabel').textContent=' Осталось: '+n;if(n<=0){clearInterval(timerId);toast('Таймер завершён')}},1000)}
+function weather(b){b.innerHTML=`<div class="card" style="text-align:center;padding:35px"><div style="font-size:70px">🌤️</div><h1>Погода</h1><h2>+18°</h2><p>Переменная облачность</p><small>Пока демонстрационный прогноз.</small></div>`}
+function photos(b){b.innerHTML=`<div class="card"><h3>Медиатека</h3><input type="file" accept="image/*" multiple onchange="photoShow(event)"><div id="photoGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:12px"></div></div>`}
+function photoShow(e){for(const f of e.target.files){let img=document.createElement('img');img.src=URL.createObjectURL(f);img.style='width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px';$('photoGrid').append(img)}}
+async function camera(b){b.innerHTML=`<div class="card"><h3>Камера</h3><video id="cameraVideo" autoplay playsinline></video><div style="display:flex;gap:8px;margin-top:10px"><button class="action" onclick="startCamera()">Включить</button><button class="action" onclick="capture()">Снимок</button><button class="action" onclick="stopCamera()">Выключить</button></div><canvas id="captureCanvas" hidden></canvas><div id="shot"></div></div>`}
+async function startCamera(){try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});$('cameraVideo').srcObject=stream}catch{toast('Камера требует HTTPS и разрешения')}}
+function capture(){let v=$('cameraVideo');if(!v.srcObject)return toast('Сначала включи камеру');let c=$('captureCanvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='photo.png';a.click()}
+function stopCamera(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null}
+function files(b){b.innerHTML=`<div class="card"><h3>Файлы устройства</h3><input type="file" multiple onchange="fileList(event)"><div id="filesList"></div></div>`}
+function fileList(e){$('filesList').innerHTML=[...e.target.files].map(f=>`<div class="row">${esc(f.name)} <small>${(f.size/1024).toFixed(1)} KB</small></div>`).join('')}
+function store(b){b.innerHTML=`<div class="card"><h2>App Store</h2><p>Каталог приложений симулятора</p>${['Игры','Творчество','Образование','Утилиты'].map(x=>`<div class="row">📦 ${x}<button class="action" onclick="toast('Веб-каталог пока не подключён')">Открыть</button></div>`).join('')}<small>Установка IPA и настоящий App Store недоступны в браузере.</small></div>`}
+function music(b){b.innerHTML=`<div class="card"><h3>Музыка</h3><input type="file" accept="audio/*" onchange="playAudio(event)"><audio id="player" controls style="width:100%;margin-top:15px"></audio></div>`}
+function playAudio(e){$('player').src=URL.createObjectURL(e.target.files[0]);$('player').play()}
+function mail(b){b.innerHTML=`<div class="card"><h3>Почта</h3><p>Открыть почтовый сервис устройства</p><button class="action" onclick="location.href='mailto:'">Открыть Почту</button></div>`}
+function maps(b){b.innerHTML=`<div class="card"><h3>Карты</h3><button class="action" onclick="window.open('https://maps.apple.com','_blank')">Apple Maps</button><button class="action" onclick="window.open('https://maps.google.com','_blank')">Google Maps</button></div>`}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+let touchY=0;
+$('phone').addEventListener('touchstart',e=>touchY=e.touches[0].clientY,{passive:true});
+$('phone').addEventListener('touchend',e=>{
+ const dy=e.changedTouches[0].clientY-touchY;
+ if(touchY<55&&dy>75&&$('lock').style.display==='none'&&$('app').style.display!=='block')showControl();
+ if(touchY>window.innerHeight-40&&dy< -50&&$('lock').style.display!=='none')unlock();
+ if(touchY>window.innerHeight-45&&dy< -55&&$('app').style.display==='block')closeApp();
 },{passive:true});
-$('homebar').addEventListener('click',()=>{if($('control').style.display==='block')hideControl();else closeApp()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){hideControl();closeApp()}});
 </script>
 </body>
